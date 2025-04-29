@@ -1,0 +1,27 @@
+ Pre Data Analysis
+print("Missing:\n", df.isnull().sum())
+print("\nTypes:\n", df.dtypes)
+
+if 'Geography' in df.columns:
+    print("\nGeography:", df['Geography'].unique())
+else:
+    print("\n'Geography' column not found.")
+
+if 'Gender' in df.columns:
+    print("Gender:", df['Gender'].unique())
+else:
+    print("'Gender' column not found.")
+
+print("\nHead:\n", df.head())
+
+# Correlation Heatmap
+plt.figure(figsize=(14, 10))
+sns.heatmap(df.select_dtypes(include=np.number).corr(), annot=True, cmap='coolwarm', fmt=".2f")
+plt.title("Correlation Heatmap")
+plt.show()
+
+# Histograms
+df.select_dtypes(include=np.number).hist(bins=20, figsize=(16, 12), color='skyblue')
+plt.suptitle("Numerical Feature Distribution")
+plt.tight_layout(rect=[0, 0.03, 1, 0.97])
+plt.show()
